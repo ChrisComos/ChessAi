@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-static char*[8][8] board;
+static char* board[8][8];
 static int maxdepth = 8;
 int main(){
   board = {
@@ -16,29 +16,51 @@ int main(){
 //while not endgame
   //player move
   //ai move(Number to indicate side)
-
+  printBoard(board);
+  printf("Begin game! \n");
+  char* move = absearch(board);
 
 }
 
 
 
 
-int isGoal(char[8][8] board){
+boolean isGoal(char* board[8][8]){
   //if endgame return true
   //if checkmate
   //if only kings left
-
+  int onlyKings, kingDown;
+  int i,j;
+  for( i = 0; i < 8; i++){
+    for (j = 0; j < 8; j++){
+      if((strcmp(board[i][j], "1K") == 0 )|| (strcmp(board[i][j], "1K") == 0)){
+        kingDown++;
+      }
+      if(!(strcmp(board[i][j], "o") == 0)){
+        onlyKings++;
+      }
+    }
+  }
+  if(kingDown < 2  || onlyKings == 0){
+    return true;
+  }
+  return false;
 }
 
-int inCheck(){
+
+boolean inCheck(){
   //dont know how to do this one yet
   //check if in check
   //return true if in check
 
 }
 
-int evalFunc(int number){
+int abevalFunc(int number){
   //evaluate board
+}
+
+char* printMoves(char* board[8][8]){
+
 }
 
 int checkValidMoves(int num, char* board[8][8]){
@@ -97,18 +119,32 @@ int checkValidMoves(int num, char* board[8][8]){
     */
 }
 
-void printBoard(char* [8][8] board){
+void printBoard(char*  board[8][8]){
   //printboard
   int i,j;
-  for( i = 0, i < 8, i++){
-    for (j = 0, j < 8, i++){
+  for( i = 0; i < 8; i++){
+    for (j = 0; j < 8; j++){
       printf("%s ", board[i][j]);
     }
     printf("\n");
   }
 }
 
-int abSearch(){}
+int abSearch(char* state[8][8]){
+  double alpha = DBL_MIN;
+  char* maxActVal;
+  char* actions[] = printMoves(board);
+  int k;
+  for( k = 0; k < sizeof(actions); k++){
+    double v = minOf(result(board,action[k]),alpha, DBL_MAX,0);
+    if(v > alpha){
+      alpha = v;
+      memcpy(action[k], maxActVal);
+    }
+  }
+  return maxActVal;
+
+}
 
 int idabSearch(){}
 
