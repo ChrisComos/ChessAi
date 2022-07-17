@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include<vector>
 
 static char* board[8][8];
 static int maxdepth = 8;
+
 int main(){
   board = {
       {"1R", "1N", "1B", "1Q", "1K", "1B", "1N", "1R"},
@@ -23,8 +25,6 @@ int main(){
 }
 
 
-
-
 boolean isGoal(char* board[8][8]){
   //if endgame return true
   //if checkmate
@@ -33,13 +33,16 @@ boolean isGoal(char* board[8][8]){
   int i,j;
   for( i = 0; i < 8; i++){
     for (j = 0; j < 8; j++){
-      if((strcmp(board[i][j], "1K") == 0 )|| (strcmp(board[i][j], "1K") == 0)){
+      if((strcmp(board[i][j], "1K") == 0 )|| (strcmp(board[i][j], "2K") == 0)){
         kingDown++;
       }
       if(!(strcmp(board[i][j], "o") == 0)){
         onlyKings++;
       }
     }
+  }
+  if(checkmate()){
+    return true;
   }
   if(kingDown < 2  || onlyKings == 0){
     return true;
@@ -55,16 +58,27 @@ boolean inCheck(){
 
 }
 
+boolean checkmate(){
+  // if checkmate return true, else false
+  // if in check and cant make a move to get out of check
+}
+
+int doMove(char* move){
+
+}
+
 int abevalFunc(int number){
   //evaluate board
 }
 
-char* printMoves(char* board[8][8]){
+char* printMoves(char* board[8][8], char* piece){
+  //print all moves for specified pieces
+  //if piece = "" then print all moves
 
 }
 
-int checkValidMoves(int num, char* board[8][8]){
-  //for each position begining with num
+vector<string> checkValidMoves(char* board[8][8]){
+  //for each position
     //check valid moves for pieces
     //P = pawn
     //R = rook
@@ -73,58 +87,76 @@ int checkValidMoves(int num, char* board[8][8]){
     //Q = Queen
     //K = King
     //o = open space
-
-
-    /*
+    vector<string> moves;
+    // move stored as location 1 move to location 2
+    // 13,36
+    //position 1,3 move to 3,6
     int i,j;
     for( i = 0, i < 8, i++){
-      for (j = 0, j < 8, i++){
+      for (j = 0, j < 8, j++){
+        char[] num = board[i][j];
+        char[] move;
+        //pawn
+        if (num[1] == 'P'){
+          if (num[0] == '1'){
+             if(j+1 < 8){
+               if(!strcmp(board[i][j+1], "o"){
+                 move = {i,j,',',i,j+1};
+                 moves.push_back(move);
+             }
+               if(i-1 >= 0){
+                 if(strcmp(board[i-1][j+1], "o") == 0){
+                   move = {i,j,',',i-1,j+1};
+                   moves.push_back(move);
+                 }
 
-        if(board[i][j] contains num){
-          if (board[i][j] contains P){
-            forward - left, right, center 1 space, 2 if first move of P
+               }
+               if(i+1 < 8){
+                 if(strcmp(board[i+1][j+1], "o") == 0){
+                   move = {i,j,',',i+1,j+1};
+                   moves.push_back(move);
+                 }
+               }
+             }
+         }
+       }
+       //rook
+        if (num[1] =='R'){
+          if(num[0] == '1'){
+            
+          }
+
+          if(num[0] == '2'){
+
+          }
         }
-          if (board[i][j] contains R){
-            forward Back
-            left - right
-            All up to 8 spaces
 
-        }
-          if (board[i][j] contains B){
-          diagonal any direction
-        }
-          if (board[i][j] contains N){
-          F2 - l1,r1
-          B2 - l1,r1
-          L2 - f1,b1
-          R2 - f1,b1
+      //   if (num[1] =='B'){
+      //   diagonal any direction
+      // }
+      //   if (num[1] =='N'){
+      //   F2 - l1,r1
+      //   B2 - l1,r1
+      //   L2 - f1,b1
+      //   R2 - f1,b1
+      //
+      // }
+      //   if (num[1] =='Q'){
+      //   any dierection any amount
+      // }
+      //   if (num[1] =='K'){
+      // //   anydirection 1 spaces
+      // //   cant move into check
+      // // }
 
-        }
-          if (board[i][j] contains Q){
-          any dierection any amount
-        }
-          if (board[i][j] contains K){
-          anydirection 1 spaces
-          cant move into check
-        }
-
-
-
-
-        }
-
-      }
-    }
-  }
-    */
-}
+}}
 
 void printBoard(char*  board[8][8]){
   //printboard
   int i,j;
   for( i = 0; i < 8; i++){
     for (j = 0; j < 8; j++){
-      printf("%s ", board[i][j]);
+      printf("%s\t", board[i][j]);
     }
     printf("\n");
   }
@@ -146,7 +178,12 @@ int abSearch(char* state[8][8]){
 
 }
 
-int idabSearch(){}
+int idabSearch(int n,char* state[8][8]){
+  int i = 0;
+  for(i; i < n; i++){
+    abSearch(state);
+  }
+}
 
 int MinMaxSearch(){}
 
