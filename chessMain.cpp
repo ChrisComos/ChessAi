@@ -51,10 +51,9 @@ boolean isGoal(char* board[8][8]){
 }
 
 
-boolean inCheck(){
-  //dont know how to do this one yet
-  //check if in check
-  //return true if in check
+boolean inCheck(vector<string> moves){
+  // for each move in moves
+  // check to see if 2nd position on board is king
 
 }
 
@@ -94,46 +93,119 @@ vector<string> checkValidMoves(char* board[8][8]){
     int i,j;
     for( i = 0, i < 8, i++){
       for (j = 0, j < 8, j++){
+
         char[] num = board[i][j];
         char[] move;
+
         //pawn
         if (num[1] == 'P'){
           if (num[0] == '1'){
-             if(j+1 < 8){
-               if(!strcmp(board[i][j+1], "o"){
-                 move = {i,j,',',i,j+1};
-                 moves.push_back(move);
+            if(j+1 < 8){
+              if(!strcmp(board[i][j+1], "o"){
+                move = {i,j,',',i,j+1};
+                moves.push_back(move);
              }
-               if(i-1 >= 0){
-                 if(strcmp(board[i-1][j+1], "o") == 0){
-                   move = {i,j,',',i-1,j+1};
-                   moves.push_back(move);
-                 }
-
+              if(i-1 >= 0){
+               if(strcmp(board[i-1][j+1], "o") == 0){
+                 move = {i,j,',',i-1,j+1};
+                 moves.push_back(move);
                }
-               if(i+1 < 8){
-                 if(strcmp(board[i+1][j+1], "o") == 0){
-                   move = {i,j,',',i+1,j+1};
-                   moves.push_back(move);
-                 }
+             }
+              if(i+1 < 8){
+               if(strcmp(board[i+1][j+1], "o") == 0){
+                 move = {i,j,',',i+1,j+1};
+                 moves.push_back(move);
                }
+             }
              }
          }
        }
        //rook
         if (num[1] =='R'){
-          if(num[0] == '1'){
-            
+          int k = 0;
+          //forward for 1 back for 2
+          for(k=j; k < 8; k++){
+            //if board at i k is open add pos to move list
+            if(!board[i][k] == "o"){
+              move = {i,j,',',i,k};
+              moves.push_back(move);
+            }
+            //if not empty stop checking for spaces
+            else{k=8;}
           }
-
-          if(num[0] == '2'){
-
+          //backward for 1 forward for 2
+          for(k=j; k >= 0; k--){
+            //if board at i k is open add pos to move list
+            if(!board[i][k] == "o"){
+              move = {i,j,',',i,k};
+              moves.push_back(move);
+            }
+            //if not empty stop checking for spaces
+            else{k=-1;}
+          }
+          //left for 1 right for 2
+          for(k=i; k < 8; k++){
+            //if board at i k is open add pos to move list
+            if(!board[i][k] == "o"){
+              move = {i,j,',',i,k};
+              moves.push_back(move);
+            }
+            //if not empty stop checking for spaces
+            else{k=8;}
+          }
+          //right for 1 left for 2
+          for(k=i; k >= 0; k--){
+            //if board at i k is open add pos to move list
+            if(!board[i][k] == "o"){
+              move = {i,j,',',i,k};
+              moves.push_back(move);
+            }
+            //if not empty stop checking for spaces
+            else{k=-1;}
           }
         }
 
-      //   if (num[1] =='B'){
-      //   diagonal any direction
-      // }
+
+        if (num[1] =='B'){
+          int k = 0;
+          for(k=0; k < 8; k++){
+            //if board at i k is open add pos to move list
+            if(i+k < 8 $$ j+k < 8){
+              if(!board[i+k][j+k] == "o"){
+                move = {i,j,',',i+k,j+k};
+                moves.push_back(move);
+              }
+              else{k=8;}}
+          }
+          for(k=0; k < 8; k++){
+            //forward diagonal
+            if(i-k >= 0 $$ j+k < 8){
+              if(!board[i+k][j+k] == "o"){
+                move = {i,j,',',i-k,j+k};
+                moves.push_back(move);
+              }
+              else{k=8;}}
+          }
+
+          for(k=0; k < 8; k++){
+            //if board at i k is open add pos to move list
+            if(i+k < 8 $$ j-k >= 0){
+              if(!board[i+k][j-k] == "o"){
+                move = {i,j,',',i+k,j-k};
+                moves.push_back(move);
+              }
+              else{k=-1;}}
+          }
+          for(k=0; k < 8; k++){
+            //if board at i k is open add pos to move list
+            if(i-k < 8 $$ j-k < 8){
+              if(!board[i-k][j-k] == "o"){
+                move = {i,j,',',i-k,j-k};
+                moves.push_back(move);
+              }
+              else{k=-1;}}
+          }
+      }
       //   if (num[1] =='N'){
       //   F2 - l1,r1
       //   B2 - l1,r1
