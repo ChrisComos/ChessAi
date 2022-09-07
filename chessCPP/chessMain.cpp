@@ -204,50 +204,74 @@ vector<string> checkValidMoves(char* board[8][8]) {
 
               //Front
               if( i + 2 <= 8) {
-                  if(j + 1){
-
+                  if(j + 1 <= 8){
+                    if(num[0] != (board[i+2][j+1])[0]){
+                      move = { i,j,',',i + 2,j + 1};
+                      moves.push_back(move);
+                    }
                   }
-                  if (j - 1){
-
+                  if (j - 1 >= 0){
+                    if(num[0] != (board[i+2][j-1])[0]){
+                      move = { i,j,',',i + 2,j - 1};
+                      moves.push_back(move);
+                    }
                   }
                 }
 
               //Back
               if( i - 2 >= 0) {
-                if(j + 1){
-
+                if(j + 1 <= 8){
+                    if(num[0] != (board[i-2][j+1])[0]){
+                      move = { i,j,',',i - 2,j + 1};
+                      moves.push_back(move);
+                    }
                 }
-                if (j - 1){
-
+                if (j - 1 >= 0){
+                    if(num[0] != (board[i-2][j-1])[0]){
+                      move = { i,j,',',i - 2,j - 1};
+                      moves.push_back(move);
+                    }
                 }
               }
 
               //Left
               if( j + 2 <= 8) {
-                if(i + 1){
-
+                if(i + 1 <= 8){
+                  if(num[0] != (board[i+1][j+2])[0]){
+                    move = { i,j,',',i + 1,j + 2};
+                    moves.push_back(move);
+                  }
                 }
-                if (i - 1){
-
+                if (i - 1 >= 0){
+                  if(num[0] != (board[i-1][j+2])[0]){
+                    move = { i,j,',',i - 1,j + 2};
+                    moves.push_back(move);
+                  }
                 }
               }
 
               //Right
               if( j - 2 >= 0) {
-                if(i + 1){
-
+                if(i + 1 <= 8){
+                  if(num[0] != (board[i+1][j-2])[0]){
+                    move = { i,j,',',i + 1,j - 2};
+                    moves.push_back(move);
+                  }
                 }
-                if (i - 1){
-
+                if (i - 1 >= 0){
+                  if(num[0] != (board[i-1][j-2])[0]){
+                    move = { i,j,',',i - 1,j - 2};
+                    moves.push_back(move);
+                  }
                 }
               }
 
             }
-            //   if (num[1] =='Q'){
-            //   any dierection any amount
-            // }
+            if (num[1] =='Q'){
+              //combination of bishop and rook
+            }
             //   if (num[1] =='K'){
-            // //   anydirection 1 spaces
+            // //   queen but one space
             // //   cant move into check
             // // }
 
