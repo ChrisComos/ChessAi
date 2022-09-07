@@ -200,13 +200,49 @@ vector<string> checkValidMoves(char* board[8][8]) {
                     }
                 }
             }
-            //   if (num[1] =='N'){
-            //   F2 - l1,r1
-            //   B2 - l1,r1
-            //   L2 - f1,b1
-            //   R2 - f1,b1
-            //
-            // }
+            if (num[1] == 'N') {
+
+              //Front
+              if( i + 2 <= 8) {
+                  if(j + 1){
+
+                  }
+                  if (j - 1){
+
+                  }
+                }
+
+              //Back
+              if( i - 2 >= 0) {
+                if(j + 1){
+
+                }
+                if (j - 1){
+
+                }
+              }
+
+              //Left
+              if( j + 2 <= 8) {
+                if(i + 1){
+
+                }
+                if (i - 1){
+
+                }
+              }
+
+              //Right
+              if( j - 2 >= 0) {
+                if(i + 1){
+
+                }
+                if (i - 1){
+
+                }
+              }
+
+            }
             //   if (num[1] =='Q'){
             //   any dierection any amount
             // }
