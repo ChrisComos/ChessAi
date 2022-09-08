@@ -269,8 +269,132 @@ vector<string> checkValidMoves(char* board[8][8]) {
             }
             if (num[1] =='Q'){
               //combination of bishop and rook
+              //rook
+              int k = 0;
+              //forward for 1 back for 2
+              for (k = j; k < 8; k++) {
+                  //if board at i k is open add pos to move list
+                  if (!(board[i][k] == "o")) {
+                      move = { i,j,',',i,k };
+                      moves.push_back(move);
+                  }
+                  //if not empty stop checking for spaces
+                  else { k = 8; }
+              }
+              //backward for 1 forward for 2
+              for (k = j; k >= 0; k--) {
+                  //if board at i k is open add pos to move list
+                  if (!(board[i][k] == "o")) {
+                      move = { i,j,',',i,k };
+                      moves.push_back(move);
+                  }
+                  //if not empty stop checking for spaces
+                  else { k = -1; }
+              }
+              //left for 1 right for 2
+              for (k = i; k < 8; k++) {
+                  //if board at i k is open add pos to move list
+                  if (!(board[i][k] == "o")) {
+                      move = { i,j,',',i,k };
+                      moves.push_back(move);
+                  }
+                  //if not empty stop checking for spaces
+                  else { k = 8; }
+              }
+              //right for 1 left for 2
+              for (k = i; k >= 0; k--) {
+                  //if board at i k is open add pos to move list
+                  if (!(board[i][k] == "o")) {
+                      move = { i,j,',',i,k };
+                      moves.push_back(move);
+                  }
+                  //if not empty stop checking for spaces
+                  else { k = -1; }
+              }
+
+              //Bishop
+              int k = 0;
+              for (k = 0; k < 8; k++) {
+                  //if board at i k is open add pos to move list
+                  if (i + k < 8 && j + k < 8) {
+                      if (!(board[i + k][j + k] == "o")) {
+                          move = { i,j,',',i + k,j + k };
+                          moves.push_back(move);
+                      }
+                      else { k = 8; }
+                  }
+              }
+              for (k = 0; k < 8; k++) {
+                  //forward diagonal
+                  if (i - k >= 0 && j + k < 8) {
+                      if (!(board[i + k][j + k] == "o")) {
+                          move = { i,j,',',i - k,j + k };
+                          moves.push_back(move);
+                      }
+                      else { k = 8; }
+                  }
+              }
+
+              for (k = 0; k < 8; k++) {
+                  //if board at i k is open add pos to move list
+                  if (i + k < 8 && j - k >= 0) {
+                      if (!(board[i + k][j - k] == "o")) {
+                          move = { i,j,',',i + k,j - k };
+                          moves.push_back(move);
+                      }
+                      else { k = -1; }
+                  }
+              }
+              for (k = 0; k < 8; k++) {
+                  //if board at i k is open add pos to move list
+                  if (i - k < 8 && j - k < 8) {
+                      if (!(board[i - k][j - k] == "o")) {
+                          move = { i,j,',',i - k,j - k };
+                          moves.push_back(move);
+                      }
+                      else { k = -1; }
+                  }
+              }
+
             }
-            //   if (num[1] =='K'){
+            if (num[1] =='K') {
+                if (i + 1 <= 8){
+                  if(j+1 < 8){
+                    move = { i,j,',',i+1,j+1 };
+                    moves.push_back(move);
+                  }
+                  if(j < 8){
+                    move = { i,j,',',i+1,j };
+                    moves.push_back(move);
+                  }
+                  if(j-1 >=0){
+                    move = { i,j,',',i+1,j-1 };
+                    moves.push_back(move);
+                  }
+                }
+                if(i < 8){
+                  if(j+1 < 8 ){
+                    move = { i,j,',',i,j+1 };
+                    moves.push_back(move);
+                  }
+                  //current location is i,j
+                  if(j-1 >=0){
+                    move = { i,j,',',i,j-1 };
+                    moves.push_back(move);
+                  }
+                }
+                if(i-1 >= 0){
+                  if(j+1 < 8){
+
+                  }
+                  if(j < 8){
+
+                  }
+                  if(j-1 >=0){
+
+                  }
+                }
+            }
             // //   queen but one space
             // //   cant move into check
             // // }
