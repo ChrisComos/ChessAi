@@ -358,6 +358,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
 
             }
             if (num[1] =='K') {
+              //check
                 if (i + 1 <= 8){
                   if(j+1 < 8){
                     move = { i,j,',',i+1,j+1 };
@@ -385,13 +386,16 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 }
                 if(i-1 >= 0){
                   if(j+1 < 8){
-
+                    move = { i,j,',',i-1,j+1 };
+                    moves.push_back(move);
                   }
                   if(j < 8){
-
+                    move = { i,j,',',i-1,j };
+                    moves.push_back(move);
                   }
                   if(j-1 >=0){
-
+                    move = { i,j,',',i-1,j+1 };
+                    moves.push_back(move);
                   }
                 }
             }
