@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <cctype>
+#include <iostream>
 using namespace std;
 
 
@@ -62,14 +63,19 @@ int abevalFunc(int number){
 }
 
 
-char* printMoves(char* board[8][8], char* piece){
-  //print all moves for specified pieces
-  //if piece = "" then print all moves
+char* printMoves(vector<string> moves){
+
+  int i = 0;
+  for( i = 0; i < sizeOf(moves); i++ ){
+    printf("%s\t", moves[i]);
+  }
+
 
 }
 vector<string> checkValidMoves(char* board[8][8]) {
     //for each position
       //check valid moves for pieces
+      //add moves to the arraylist of moves
       //P = pawn
       //R = rook
       //B = Bishop
@@ -402,7 +408,9 @@ vector<string> checkValidMoves(char* board[8][8]) {
             // //   queen but one space
             // //   cant move into check
             // // }
-
+          }
+        }
+      }
 
 void printBoard(char*  board[8][8]){
   //printboard
