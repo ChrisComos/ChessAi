@@ -26,6 +26,9 @@ static int maxdepth = 8;
 bool checkmate(){
   // if checkmate return true, else false
   // if in check and cant make a move to get out of check
+
+  //check if in check, if so, check moves resulting in non check, if none, checkmate true
+  return false;
 }
 
 int doMove(char* move){
@@ -58,8 +61,51 @@ bool isGoal(char* board[8][8]) {
 }
 
 
-int abevalFunc(int number){
-  //evaluate board
+int abevalFunc(char* board[8][8], int number){
+  //evaluate board, number for if we have more than one eval function
+  // do simple k = 20 q = 9 brk = 5 p = 1
+  int pts = 0;
+  int i, j;
+  for( i = 0 ; i < 8 ; i++ ){
+    for( j = 0 ; j < 8 ; j++ ){
+      char piece[2] = board[i][j];
+      if( piece[0] == '1'){
+          if(piece[1] == 'K') {pts += 20;}
+          if(piece[1] == 'Q') {pts += 9;}
+          if(piece[1] == 'N') {pts += 5;}
+          if(piece[1] == 'B') {pts += 5;}
+          if(piece[1] == 'R') {pts += 5;}
+          if(piece[1] == 'P') {pts += 1;}
+      }
+      else if( piece[0] == '2'){
+        if(piece[1] == 'K') {pts -= 20;}
+        if(piece[1] == 'Q') {pts -= 9;}
+        if(piece[1] == 'N') {pts -= 5;}
+        if(piece[1] == 'B') {pts -= 5;}
+        if(piece[1] == 'R') {pts -= 5;}
+        if(piece[1] == 'P') {pts -= 1;}
+      }
+
+    }
+  }
+
+
+
+  if(pts > 0){
+    //favors p1
+    return 1;
+  }
+  else if ( pts < 0){
+    //favors p2
+    return -1;
+  }
+  else{
+    //favors no one
+    return 0;
+  }
+
+
+
 }
 
 
@@ -72,6 +118,7 @@ char* printMoves(vector<string> moves){
 
 
 }
+
 vector<string> checkValidMoves(char* board[8][8]) {
     //for each position
       //check valid moves for pieces
