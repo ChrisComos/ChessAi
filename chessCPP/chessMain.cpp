@@ -8,7 +8,7 @@ using namespace std;
 
 
 //get it working then refactor so not all a god file
-
+//
 char* board[8][8];
 static int maxdepth = 8;
 
@@ -17,11 +17,15 @@ static int maxdepth = 8;
 
 
 
-//bool inCheck(vector<string> moves){
+bool inCheck(vector<string> moves){
   // for each move in moves
   // check to see if 2nd position on board is king
+  int i = 0;
+  for( i = 0; i < sizeOf(moves); i++ ){
 
-//}
+  }
+
+}
 
 bool checkmate(){
   // if checkmate return true, else false
