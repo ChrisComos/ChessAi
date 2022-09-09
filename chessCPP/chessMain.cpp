@@ -22,7 +22,8 @@ bool inCheck(vector<string> moves){
   // check to see if 2nd position on board is king
   int i = 0;
   for( i = 0; i < sizeOf(moves); i++ ){
-
+    char* move = moves[i];
+    if(board[move[4]][move[5]] == 'K')
   }
 
 }
@@ -63,7 +64,6 @@ bool isGoal(char* board[8][8]) {
   }
   return false;
 }
-
 
 int abevalFunc(char* board[8][8], int number){
   //evaluate board, number for if we have more than one eval function
@@ -111,7 +111,6 @@ int abevalFunc(char* board[8][8], int number){
 
 
 }
-
 
 char* printMoves(vector<string> moves){
 
