@@ -73,21 +73,21 @@ int abevalFunc(char* board[8][8], int number){
   for( i = 0 ; i < 8 ; i++ ){
     for( j = 0 ; j < 8 ; j++ ){
       char piece[2] = board[i][j];
-      if( piece[0] == '1'){
-          if(piece[1] == 'K') {pts += 20;}
-          if(piece[1] == 'Q') {pts += 9;}
-          if(piece[1] == 'N') {pts += 5;}
-          if(piece[1] == 'B') {pts += 5;}
-          if(piece[1] == 'R') {pts += 5;}
-          if(piece[1] == 'P') {pts += 1;}
+      if( strcmp(piece[0], "1") == 0 ){
+          if(strcmp(piece[1], "K") == 0) {pts += 20;}
+          if(strcmp(piece[1], "Q") == 0) {pts += 9;}
+          if(strcmp(piece[1], "N") == 0) {pts += 5;}
+          if(strcmp(piece[1], "B") == 0) {pts += 5;}
+          if(strcmp(piece[1], "R") == 0) {pts += 5;}
+          if(strcmp(piece[1], "P") == 0) {pts += 1;}
       }
-      else if( piece[0] == '2'){
-        if(piece[1] == 'K') {pts -= 20;}
-        if(piece[1] == 'Q') {pts -= 9;}
-        if(piece[1] == 'N') {pts -= 5;}
-        if(piece[1] == 'B') {pts -= 5;}
-        if(piece[1] == 'R') {pts -= 5;}
-        if(piece[1] == 'P') {pts -= 1;}
+      else if(strcmp(piece[0], "2") == 0){
+        if(strcmp(piece[1], "K") == 0) {pts -= 20;}
+        if(strcmp(piece[1], "Q") == 0) {pts -= 9;}
+        if(strcmp(piece[1], "N") == 0) {pts -= 5;}
+        if(strcmp(piece[1], "B") == 0) {pts -= 5;}
+        if(strcmp(piece[1], "R") == 0) {pts -= 5;}
+        if(strcmp(piece[1], "P") == 0) {pts -= 1;}
       }
 
     }
@@ -145,7 +145,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
             char* move;
 
             //pawn
-            if (num[1] == 'P') {
+            if (strcmp(num[1], "P") == 0)  {
                 if (num[0] == '1') {
                     if (j + 1 < 8) {
                         if (!strcmp(board[i][j + 1], "o")) {
@@ -168,12 +168,12 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 }
             }
             //rook
-            if (num[1] == 'R') {
+            if (strcmp(num[1], "R") == 0) {
                 int k = 0;
                 //forward for 1 back for 2
                 for (k = j; k < 8; k++) {
                     //if board at i k is open add pos to move list
-                    if (!(board[i][k] == "o")) {
+                    if ((strcmp(board[i][j], "o") == 0)) {
                         move = { i,j,',',i,k };
                         moves.push_back(move);
                     }
@@ -183,7 +183,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 //backward for 1 forward for 2
                 for (k = j; k >= 0; k--) {
                     //if board at i k is open add pos to move list
-                    if (!(board[i][k] == "o")) {
+                    if ((strcmp(board[i][j], "o") == 0)) {
                         move = { i,j,',',i,k };
                         moves.push_back(move);
                     }
@@ -193,7 +193,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 //left for 1 right for 2
                 for (k = i; k < 8; k++) {
                     //if board at i k is open add pos to move list
-                    if (!(board[i][k] == "o")) {
+                    if ((strcmp(board[i][j], "o") == 0)) {
                         move = { i,j,',',i,k };
                         moves.push_back(move);
                     }
@@ -203,7 +203,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 //right for 1 left for 2
                 for (k = i; k >= 0; k--) {
                     //if board at i k is open add pos to move list
-                    if (!(board[i][k] == "o")) {
+                    if (strcmp(board[i][j], "o") == 0) {
                         move = { i,j,',',i,k };
                         moves.push_back(move);
                     }
@@ -212,12 +212,12 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 }
             }
             //bishop
-            if (num[1] == 'B') {
+            if ((strcmp(num[1], "B") == 0)) {
                 int k = 0;
                 for (k = 0; k < 8; k++) {
                     //if board at i k is open add pos to move list
                     if (i + k < 8 && j + k < 8) {
-                        if (!(board[i + k][j + k] == "o")) {
+                        if (strcmp(board[i + k][j + k], "o")== 0) {
                             move = { i,j,',',i + k,j + k };
                             moves.push_back(move);
                         }
@@ -227,7 +227,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 for (k = 0; k < 8; k++) {
                     //forward diagonal
                     if (i - k >= 0 && j + k < 8) {
-                        if (!(board[i + k][j + k] == "o")) {
+                        if (strcmp(board[i + k][j + k],"o") == 0) {
                             move = { i,j,',',i - k,j + k };
                             moves.push_back(move);
                         }
@@ -238,7 +238,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 for (k = 0; k < 8; k++) {
                     //if board at i k is open add pos to move list
                     if (i + k < 8 && j - k >= 0) {
-                        if (!(board[i + k][j - k] == "o")) {
+                        if ((board[i + k][j - k],"o") == 0) {
                             move = { i,j,',',i + k,j - k };
                             moves.push_back(move);
                         }
@@ -248,7 +248,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
                 for (k = 0; k < 8; k++) {
                     //if board at i k is open add pos to move list
                     if (i - k < 8 && j - k < 8) {
-                        if (!(board[i - k][j - k] == "o")) {
+                        if (strcmp(board[i - k][j - k], "o") == 0) {
                             move = { i,j,',',i - k,j - k };
                             moves.push_back(move);
                         }
@@ -256,7 +256,8 @@ vector<string> checkValidMoves(char* board[8][8]) {
                     }
                 }
             }
-            if (num[1] == 'N') {
+            //knight
+            if (strcmp(num[1], "N") == 0)  {
 
               //Front
               if( i + 2 <= 8) {
@@ -323,14 +324,15 @@ vector<string> checkValidMoves(char* board[8][8]) {
               }
 
             }
-            if (num[1] =='Q'){
+            //queen
+            if (strcmp(num[1], "Q") == 0) {
               //combination of bishop and rook
               //rook
               int k = 0;
               //forward for 1 back for 2
               for (k = j; k < 8; k++) {
                   //if board at i k is open add pos to move list
-                  if (!(board[i][k] == "o")) {
+                  if (strcmp(board[i + k][j + k], "o")== 0) {
                       move = { i,j,',',i,k };
                       moves.push_back(move);
                   }
@@ -340,7 +342,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
               //backward for 1 forward for 2
               for (k = j; k >= 0; k--) {
                   //if board at i k is open add pos to move list
-                  if (!(board[i][k] == "o")) {
+                  if (strcmp(board[i + k][j + k], "o")== 0) {
                       move = { i,j,',',i,k };
                       moves.push_back(move);
                   }
@@ -350,7 +352,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
               //left for 1 right for 2
               for (k = i; k < 8; k++) {
                   //if board at i k is open add pos to move list
-                  if (!(board[i][k] == "o")) {
+                  if (strcmp(board[i + k][j + k], "o")== 0) {
                       move = { i,j,',',i,k };
                       moves.push_back(move);
                   }
@@ -360,7 +362,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
               //right for 1 left for 2
               for (k = i; k >= 0; k--) {
                   //if board at i k is open add pos to move list
-                  if (!(board[i][k] == "o")) {
+                  if (strcmp(board[i + k][j + k], "o")== 0) {
                       move = { i,j,',',i,k };
                       moves.push_back(move);
                   }
@@ -373,7 +375,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
               for (k = 0; k < 8; k++) {
                   //if board at i k is open add pos to move list
                   if (i + k < 8 && j + k < 8) {
-                      if (!(board[i + k][j + k] == "o")) {
+                      if (strcmp(board[i + k][j + k], "o")== 0) {
                           move = { i,j,',',i + k,j + k };
                           moves.push_back(move);
                       }
@@ -383,7 +385,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
               for (k = 0; k < 8; k++) {
                   //forward diagonal
                   if (i - k >= 0 && j + k < 8) {
-                      if (!(board[i + k][j + k] == "o")) {
+                      if (strcmp(board[i + k][j + k], "o")== 0) {
                           move = { i,j,',',i - k,j + k };
                           moves.push_back(move);
                       }
@@ -394,7 +396,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
               for (k = 0; k < 8; k++) {
                   //if board at i k is open add pos to move list
                   if (i + k < 8 && j - k >= 0) {
-                      if (!(board[i + k][j - k] == "o")) {
+                      if (strcmp(board[i + k][j + k], "o")== 0) {
                           move = { i,j,',',i + k,j - k };
                           moves.push_back(move);
                       }
@@ -404,7 +406,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
               for (k = 0; k < 8; k++) {
                   //if board at i k is open add pos to move list
                   if (i - k < 8 && j - k < 8) {
-                      if (!(board[i - k][j - k] == "o")) {
+                      if (strcmp(board[i + k][j + k], "o")== 0) {
                           move = { i,j,',',i - k,j - k };
                           moves.push_back(move);
                       }
@@ -413,7 +415,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
               }
 
             }
-            if (num[1] =='K') {
+            if (strcmp(num[1], "K") == 0)  {
               //check
                 if (i + 1 <= 8){
                   if(j+1 < 8){
@@ -462,7 +464,7 @@ vector<string> checkValidMoves(char* board[8][8]) {
         }
       }
 
-void printBoard(char*  board[8][8]){
+void printBoard(char*  board[8][8]){7
   //printboard
   int i,j;
   for( i = 0; i < 8; i++){
