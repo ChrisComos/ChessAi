@@ -11,7 +11,14 @@ using namespace std;
 
 //get it working then refactor so not all a god file
 //
-string startBoard[8][8] = {
+
+
+static int maxdepth = 8;
+
+
+int main() {
+
+    string** startBoard = {
         {"1R", "1N", "1B", "1Q", "1K", "1B", "1N", "1R"},
         {"1P", "1P", "1P", "1P", "1P", "1P", "1P", "1P"},
            {"o", "o", "o", "o", "o", "o", "o", "o"},
@@ -20,11 +27,9 @@ string startBoard[8][8] = {
            {"o", "o", "o", "o", "o", "o", "o", "o"},
         {"2P", "2P", "2P", "2P", "2P", "2P", "2P", "2P"},
         {"2R", "2N", "2B", "2Q", "2K", "2B", "2N", "2R"}
-};
-static int maxdepth = 8;
+    };
 
 
-int main() {
 
     //while not endgame
       //player move
@@ -35,7 +40,12 @@ int main() {
 
 }
 
-void printBoard(string board[8][8]) {
+string** initializeBoard() {
+
+
+}
+
+void printBoard(string **board) {
     //printboard;
     int i;
     int j = 0;
@@ -51,16 +61,12 @@ int doMove(char* move) {
     //TODO
 }
 
-bool inCheck(vector<string> moves){
+bool inCheck(string move){
   // for each move in moves
   // check to see if 2nd position on board is king
-    int i = 0;
-    for( i = 0; i < moves.size(); i++) {
-      string move[5] = moves[i];
-      if (move[4] == "K") {
+      if (move[4] == 'K') {
         return true;
     }
-  }
 
 }
 
@@ -72,7 +78,7 @@ bool checkmate(){
   return false;
 }
 
-bool isGoal(string board[8][8]) {
+bool isGoal(string **board) {
   //if endgame return true
   //if checkmate
   //if only kings left
@@ -97,7 +103,7 @@ bool isGoal(string board[8][8]) {
   return false;
 }
 
-int abevalFunc(string board[8][8], int number){
+int abevalFunc(string** board, int number){
   //evaluate board, number for if we have more than one eval function
   // do simple k = 20 q = 9 brk = 5 p = 1
   int pts = 0;
@@ -154,7 +160,7 @@ char* printMoves(vector<string> moves){
 
 }
 
-vector<string> checkValidMoves(string board[8][8]) {
+vector<string> checkValidMoves(string board[][8]) {
     //for each position
       //check valid moves for pieces
       //add moves to the arraylist of moves
@@ -497,9 +503,17 @@ vector<string> checkValidMoves(string board[8][8]) {
         }
       }
 
-string** result(string state[8][8], string action) {
+string** result(string **state, string action) {
     // 12,34
-    string childState[8][8] = state;
+
+    //copy state
+    string **childState;
+    int i,j;
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            childState[i][j] = state[i][j];
+        }
+    }
     //take piece
     string pieceToMove = childState[action[0]][action[1]];
     //put to new location
@@ -512,24 +526,22 @@ string** result(string state[8][8], string action) {
 
 }
 
-double maxVal(string[8][8] state, double alpha, double beta, int depth) {
-    //if goal or max depth
-    // return evaluation
-
-    double v = DBL_MIN;
-    vector<string> actions;
-        int i;
-        for (i = 0; i < actions.size(); i++) {
-            v = max(v, minVal(result(state, action), alpha, beta, depth + 1));
-            if (v >= beta) {
-                return v;
-            }
-            alpha = max(alpha, v);
-        }
-    }
+//find max of 2 values
+double maximum(double a, double b) {
+    if (a <= b) { return b; }
+    return a;
 }
 
-double minVal(string[8][8] state, double alpha, double beta, int depth) {
+//find the min of 2 values
+double minimum(double a, double b) {
+    if (a >= b) { return b; }
+    return a;
+
+}
+
+double minVal(string **state, double alpha, double beta, int depth);
+
+double maxVal(string **state, double alpha, double beta, int depth) {
     //if goal or max depth
     // return evaluation
 
@@ -537,18 +549,33 @@ double minVal(string[8][8] state, double alpha, double beta, int depth) {
     vector<string> actions;
     int i;
     for (i = 0; i < actions.size(); i++) {
-        v = min(v, maxVal(result(state, action), alpha, beta, depth + 1));
+        v = maximum(v, minVal(result(state, actions[i]), alpha, beta, depth + 1));
+        if (v >= beta) {
+            return v;
+        }
+        alpha = max(alpha, v);
+    }
+}
+
+
+double minVal(string **state, double alpha, double beta, int depth) {
+    //if goal or max depth
+    // return evaluation
+
+    double v = DBL_MAX;
+    vector<string> actions;
+    int i;
+    for (i = 0; i < actions.size(); i++) {
+        v = minimum(v, maxVal(result(state, actions[i]), alpha, beta, depth + 1));
         if (v >= alpha) {
             return v;
         }
         beta = min(beta, v);
     }
 }
-}
 
 
-
-string abSearch(string state[8][8]){
+string abSearch(string **state) {
   double alpha = DBL_MIN;
   string maxActVal;
   vector<string> actions; // = printMoves(board);
@@ -564,7 +591,7 @@ string abSearch(string state[8][8]){
 
 }
 
-int idabSearch(int n,string state[8][8]){
+int idabSearch(int n,string **state) {
   int i = 0;
   for(i; i < n; i++){
     abSearch(state);

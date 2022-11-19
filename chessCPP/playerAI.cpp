@@ -519,7 +519,39 @@ int MinMaxSearch() {}
 int monteCarlo() {}
 
 
+double maxVal(string** state, double alpha, double beta, int depth) {
+    //if goal or max depth
+    // return evaluation
 
+    double v = DBL_MIN;
+    vector<string> actions;
+    int i;
+    for (i = 0; i < actions.size(); i++) {
+        v = max(v, minVal(result(state, actions[i]), alpha, beta, depth + 1));
+        if (v >= beta) {
+            return v;
+        }
+        alpha = max(alpha, v);
+    }
+}
+}
+
+double minVal(string[8][8] state, double alpha, double beta, int depth) {
+    //if goal or max depth
+    // return evaluation
+
+    double v = DBL_MIN;
+    vector<string> actions;
+    int i;
+    for (i = 0; i < actions.size(); i++) {
+        v = min(v, maxVal(result(state, action[i]), alpha, beta, depth + 1));
+        if (v >= alpha) {
+            return v;
+        }
+        beta = min(beta, v);
+    }
+}
+}
 
 
 
